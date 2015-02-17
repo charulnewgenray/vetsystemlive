@@ -1,0 +1,24 @@
+Old Database Tables             New Data base Tables               Status
+
+	cat_breeds                  cat_breeds
+	cat_price_factor			cat_price_factor			  No Change
+	cat_questions
+	cities
+	customers                   customers                      No change
+	customer_pets_answer        customer_pets_answer           No change
+	dog_breeds
+	dog_price_factor			dog_price_factor			   No Change
+	general_questions
+	health_declaration
+	health_questions
+	illness_questions
+	messages
+	orders
+	permissions
+	pets                         pets                          No change
+	price_factor
+	roles
+	role_perm
+	sessions
+	users_auth
+	user_role
