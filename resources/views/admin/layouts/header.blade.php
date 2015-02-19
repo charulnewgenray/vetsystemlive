@@ -19,10 +19,9 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 @if (Auth::guest())
-                    <li><a href="auth/login"><i class="fa fa-sign-out fa-fw"></i> Login</a></li>
+                    <li><a href="{{url('/auth/login', $parameters = array(), $secure = null)}}"><i class="fa fa-sign-out fa-fw"></i> Login</a></li>
                 @else
-
-                    <li><a href="auth/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                    <li><a href="{{url('/auth/logout', $parameters = array(), $secure = null)}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                 @endif
             </ul>
             <!-- /.dropdown-user -->

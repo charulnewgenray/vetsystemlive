@@ -136,7 +136,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-
+		'Illuminate\Html\HtmlServiceProvider',
 		/*
 		 * Application Service Providers...
 		 */
@@ -147,7 +147,6 @@ return [
 		'App\Providers\RouteServiceProvider',
 
 		'Rappasoft\Vault\VaultServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
 
 	],
 

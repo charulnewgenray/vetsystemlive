@@ -1,0 +1,11 @@
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td
+{font-size: 13px;}
+
+.dataTables_filter {text-align: left;}
+.dataTables_filter input[type='search']{margin-right:10px; }
+.model-btn-wrapper {margin-bottom: 10px;}
+.form-delete-btn {float: left;margin: 0 5px 0 0;}
+.fa-search {line-height: 19px;}
+.btn-default.fa-edit{}
+.btn-default.fa-edit{padding: 5px 10px;}
+.btn.btn-danger{padding: 6px 12px;}

@@ -27,34 +27,34 @@
                 <a href="#"><i class="fa fa-cogs fa-fw"></i>  {{ trans('general.Settings')}}<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="/admin/settings/dog-price-factor">{{ trans('general.Dog-Price-Factor')}}</a>
+                        <a href="{{route('admin.settings.show','dog-price-factor')}}">{{ trans('general.Dog-Price-Factor')}}</a>
                     </li>
                     <li>
-                        <a href="/admin/settings/cat-price-factor">{{ trans('general.Cat-Price-Factor') }}</a>
+                        <a href="{{route('admin.settings.show','cat-price-factor')}}">{{ trans('general.Cat-Price-Factor') }}</a>
                     </li>
                     <li>
-                        <a href="dog-breeds">{{ trans('general.Dog-Breeds') }}</a>
+                        <a href="{{route('admin.settings.show','dog-breeds')}}">{{ trans('general.Dog-Breeds') }}</a>
                     </li>
                     <li>
-                        <a href="cat-breeds">{{ trans('general.Cat-Breeds')}}</a>
+                        <a href="{{route('admin.settings.show','cat-breeds')}}">{{ trans('general.Cat-Breeds')}}</a>
                     </li>
                     <li>
-                        <a href="health-questions">{{ trans('Health-Questions')}} </a>
+                        <a href="{{route('admin.settings.show','health-questions')}}">{{ trans('general.Health-Questions')}} </a>
                     </li>
                     <li>
-                        <a href="cat-questions">{{ trans('general.Cat-Questions') }}</a>
+                        <a href="{{route('admin.settings.show','cat-questions')}}">{{ trans('general.Cat-Questions') }}</a>
                     </li>
                     <li>
-                        <a href="illness-questions">{{ trans('general.Illness-Questions')}}</a>
+                        <a href="{{route('admin.settings.show','illness-questions')}}">{{ trans('general.Illness-Questions')}}</a>
                     </li>
                     <li>
-                        <a href="general-questions">{{ trans('general.General-Questions')}}</a>
+                        <a href="{{route('admin.settings.show','general-questions')}}">{{ trans('general.General-Questions')}}</a>
                     </li>
                     <li>
-                        <a href="messages">{{ trans('general.Messages')}}</a>
+                        <a href="{{route('admin.settings.show','messages')}}">{{ trans('general.Messages')}}</a>
                     </li>
                     <li>
-                        <a href="prices">{{ trans('general.Prices') }}</a>
+                        <a href="{{route('admin.settings.show','price-factor')}}">{{ trans('general.Prices') }}</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

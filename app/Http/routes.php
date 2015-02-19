@@ -48,9 +48,14 @@ Route::group([
 	Route::group(['prefix' => 'admin'], function ()
 	{
 		/*Admin Management*/
-		Route::resource('/', 'Admin\DashboardController');
-		Route::resource('/customers', 'Admin\CustomerController');
-		Route::resource('/settings', 'Admin\settingsController');
+		Route::get('/',['as' => 'admin.dashboard.index','uses' => 'Admin\DashboardController@index']);
+		Route::get('/customers',['as' => 'admin.customers.index','uses' => 'Admin\CustomerController@index']);
+		Route::get('/customers/{id}',['as' => 'admin.customers.show','uses' => 'Admin\CustomerController@show']);
+		Route::get('/settings/{id}',['as' => 'admin.settings.show','uses' => 'Admin\SettingsController@show']);
+		Route::put('/settings/{id}',['as' => 'admin.settings.store','uses' => 'Admin\SettingsController@store']);
+		Route::post('/settings/{id}',['as' => 'admin.settings.create','uses' => 'Admin\SettingsController@create']);
+		Route::delete('/settings/{id}',['as' => 'admin.settings.delete','uses' => 'Admin\SettingsController@delete']);
+
 	});
 });
 

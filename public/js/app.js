@@ -4,6 +4,18 @@ $(function() {
     $('#customer-table').DataTable({
         ordering:  false
     });
+    $('#dogbreeds-table').DataTable({
+        ordering:  false
+    });
+    $('#catbreeds-table').DataTable({
+        ordering:  false
+    });
+    $('#healthquestions-table').DataTable({
+        ordering:  false
+    });
+    $('#catquestions-table').DataTable({
+        ordering:  false
+    });
 });
 
 //Loads the correct sidebar on window load,
