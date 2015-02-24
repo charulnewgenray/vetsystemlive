@@ -1,5 +1,6 @@
 <!-- Scripts -->
 <script src="/js/bootstrap/bootstrap.min.js"></script>
+
 <script src="/js/jquery/jquery.dataTables.min.js"></script>
 <script src="/js/plugins/dataTables.bootstrap.js"></script>
 <script src="/js/plugins/metisMenu.min.js"></script>

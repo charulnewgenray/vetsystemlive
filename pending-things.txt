@@ -1,0 +1,11 @@
+->In pet Details:-
+	1.Color is not defined.
+->Db table:-
+	customer_plan_history(it records the customer and plan history)
+
+->A plan id for the customer may be more than one
+and for pet it would be one.
+For this now:-
+	we create a table that will map the pet_plan
+		fields:-
+		id,plan_id,pet_id,customer_id

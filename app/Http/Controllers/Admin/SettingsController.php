@@ -460,8 +460,6 @@ class SettingsController extends Controller {
 		return Redirect::back()->withInput()->withFlashSuccess('Item has been added successfully');
 	}
 
-
-
 	/*
      * Price Factor
      */
@@ -577,5 +575,4 @@ class SettingsController extends Controller {
 		}
 		return Redirect::back()->withInput()->withFlashSuccess('Item has been deleted');
 	}
-
 }
