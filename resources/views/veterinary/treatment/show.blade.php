@@ -286,12 +286,12 @@
                             </div>
                             <div class="portlet-body form">
                                 <!-- BEGIN FORM-->
-                                <form action="#" class="form-horizontal">
+                                <form action="{{route('veterinary.treatment.post')}}" class="form-horizontal" method="post">
                                     <input type="hidden" name="_token" value="{{$token}}">
                                     <div class="form-body">
                                         <div class="form-group first">
                                             <div class="col-xs-6">
-                                                <select class="form-control" id="event">
+                                                <select class="form-control" id="event" name="event">
                                                     @foreach($events as $event)
                                                         <option value="{{$event->event_id}}">{{$event->name}}</option>
                                                     @endforeach
@@ -305,7 +305,7 @@
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <div class="form-group">
-                                                        <textarea class="form-control" rows="3"></textarea>
+                                                        <textarea class="form-control" rows="3" name="visit_description"></textarea>
                                                     </div>
                                                 </div>
 
@@ -320,14 +320,14 @@
                                                         <!--<label class="col-xs-3 control-label">{{$lastVaccination->vaccine_name}}</label>-->
                                                         <div class="col-xs-9">
                                                             <div class="form-group">
-                                                                <select class="form-control" id="search-select">
+                                                                <select class="form-control" id="search-select" name="examination-id">
                                                                     @foreach($examinations as $examination)
                                                                         <option value="{{$examination->exam_id}}">{{$examination->exam_name}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="examination_value" value="" placeholder="examination-value"/>
+                                                                <input type="text" class="form-control" name="examination-value" value="" placeholder="examination-value"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -338,14 +338,48 @@
                                         </div>
                                         <div class="form-group first">
                                             <div class="col-xs-12">
-                                                <label class="col-xs-1 control-label">Exclusions:</label>
-                                                <div class="col-xs-11">
-                                                    <p class="form-control-static">
-                                                        {{$petrecord->exclusion}}
-                                                    </p>
+                                                <h4>Covered Treatments:</h4>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-1 col-xs-10">
+                                                @foreach($treatments as $treatment)
+                                                    @if($treatment->plan_id == 1)
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input name="covered-treatment[]" type="checkbox" value="{{$treatment->treatment_id}}"> {{$treatment->treatment_name}}
+                                                            </label>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="form-group first">
+                                            <div class="col-xs-12">
+                                                <h4>Not Covered Treatments:</h4>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-1 col-xs-10">
+                                                @foreach($treatments as $treatment)
+                                                    @if($treatment->plan_id == 0)
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input name="not-covered-treatment[]" type="checkbox" value="{{$treatment->treatment_id}}"> {{$treatment->treatment_name}}
+                                                            </label>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-1 col-xs-10">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="emergency" type="checkbox" value="1"> Is it an Emergency
+                                                    </label>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <!-- add more than one fields  -->
                                     </div>
@@ -417,7 +451,6 @@
                         dataType:'json',
                         data:data,
                         success: function (data) {
-                            //console.log(data['visits']);
                             $('#visits').html(data['visits']);
                             $('#last_vaccinations').html(data['last_vaccinations']);
                         }
@@ -431,7 +464,7 @@
     <!-- end -->
     <pre style="direction: ltr;">
 
-        <!--{{ print_r($examinations) }}-->
+        <!--{{ print_r($treatments) }}-->
 
     </pre>
 @endsection

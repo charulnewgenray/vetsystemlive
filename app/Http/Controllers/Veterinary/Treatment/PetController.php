@@ -14,6 +14,7 @@ use App\Models\Veterinary\Pets;
 use App\Models\Veterinary\Events;
 use App\Models\Veterinary\Examinations;
 use App\Models\Veterinary\Visits;
+use App\Models\Veterinary\Treatments;
 use Illuminate\Support\Facades\DB;
 
 class PetController extends Controller {
@@ -62,7 +63,8 @@ class PetController extends Controller {
         $visits = Visits::where('event_id','=',$firstEvent->event_id)->get();
         $lastVaccinations = DB::table('last_vaccinations')->where('event_id','=',$firstEvent->event_id)->get();
         $examinations = Examinations::all();
-        return view('veterinary.treatment.show',compact('records','events','lastVaccinations','visits','token','examinations'));
+        $treatments = Treatments::all();
+        return view('veterinary.treatment.show',compact('records','events','lastVaccinations','visits','token','examinations','treatments'));
     }
 
     public function event(){
@@ -82,6 +84,12 @@ class PetController extends Controller {
         }
         $html = array('visits'=>$visitsHtml,'last_vaccinations'=>$lastVaccinationsHtml);
         echo json_encode($html);
+    }
+
+    public function treatmentpost(){
+        $post = Input::all();
+        $treatmentPost = Treatments::treatmentPost($post);
+        return redirect()->back()->with('message',"Request Pet not found please recheck your credentials");
     }
 
 }
