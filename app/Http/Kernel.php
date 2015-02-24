@@ -30,6 +30,7 @@ class Kernel extends HttpKernel {
 		'vault.routeNeedsRole' => 'Rappasoft\Vault\Http\Middleware\RouteNeedsRole',
 		'vault.routeNeedsPermission' => 'Rappasoft\Vault\Http\Middleware\RouteNeedsPermission',
 		'vault.routeNeedsRoleOrPermission' => 'Rappasoft\Vault\Http\Middleware\RouteNeedsRoleOrPermission',
+		'pets.auth' => 'App\Http\Middleware\PetsAuthenticate',
 	];
 
 }
