@@ -286,16 +286,21 @@
                             </div>
                             <div class="portlet-body form">
                                 <!-- BEGIN FORM-->
-                                <form action="{{route('veterinary.treatment.post')}}" class="form-horizontal" method="post">
+                                <form id="treatment-form" action="{{route('veterinary.treatment.post')}}" class="form-horizontal" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{$token}}">
                                     <div class="form-body">
                                         <div class="form-group first">
                                             <div class="col-xs-6">
-                                                <select class="form-control" id="event" name="event">
+                                                <select class="form-control" id="events-treatment" name="event">
                                                     @foreach($events as $event)
                                                         <option value="{{$event->event_id}}">{{$event->name}}</option>
                                                     @endforeach
                                                 </select>
+                                                <input class="form-control" type="text" placeholder="new-event" value="" name="new-event" id="new-event-box" style="display: none;">
+                                                <input type="hidden" name="new-event-hidden" value="0"/>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <div id="new-event-button" class="btn green">New Event</div>
                                             </div>
                                         </div>
                                         <div class="form-group first">
@@ -370,8 +375,30 @@
                                                         </div>
                                                     @endif
                                                 @endforeach
+
                                             </div>
                                         </div>
+
+                                        <div class="form-group first">
+                                            <div class="col-xs-6">
+                                                <div class="col-xs-3">
+                                                    <label class="col-sm-offset-1 control-label">File Label</label>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <div class="form-group">
+                                                        <input name="file-label" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="col-xs-12">
+                                                    <input name="attached-treatment" type="file" class="filestyle" data-buttonName="btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <div class="col-sm-offset-1 col-xs-10">
                                                 <div class="checkbox">
@@ -457,7 +484,24 @@
                     });
                 });
             });
-            $(function(){$('#search-select').searchableSelect();});
+            var click = 0;
+            $('#new-event-button').click(function(){
+                if(click == 0){
+                    $('#events-treatment').hide();
+                    $('#new-event-box').show();
+                    $('#new-event-button').text('Get Events');
+                    $("#treatment-form :input[name='new-event-hidden']").val(1);
+                    click = 1;
+                }else{
+                    $('#events-treatment').show();
+                    $('#new-event-box').hide();
+                    $('#new-event-button').text('New Event');
+                    $("#treatment-form :input[name='new-event-hidden']").val(0);
+                    click = 0;
+                }
+            });
+            $('#search-select').searchableSelect();
+
         });
     </script>
 
