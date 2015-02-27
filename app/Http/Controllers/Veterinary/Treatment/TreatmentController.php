@@ -94,12 +94,6 @@ class TreatmentController extends Controller {
 	 */
 	public function setTreatment(){
 		$post = Input::all();
-		$file = Input::file('attached-treatment');
-		/*var_dump($file->getRealPath());
-		die;*/
-		//$destinationPath = 'uploads/';
-		//$file->move($destinationPath,$file->getClientOriginalName());
-		//die('success');
 		/* if the form use the new event field */
 		if($post['new-event-hidden']){
 			$rules = array('new-event' => 'required');
@@ -112,6 +106,10 @@ class TreatmentController extends Controller {
 		{
 			return redirect()->back()->withErrors($validator);
 		}else{
+			$file = Input::file('attached-treatment');
+			$destinationPath = 'attachments/';
+			$file->move($destinationPath,$file->getClientOriginalName());
+
 			if($post['new-event-hidden']){
 				$treatmentPost = Treatments::NewEventTreatment($post);
 				return redirect()->back()->with('message',"Request Pet not found please recheck your credentials");

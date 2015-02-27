@@ -61,7 +61,15 @@ class PetController extends Controller {
         $events = Events::where('pet_id','=',$id)->get();
         $firstEvent = Events::where('pet_id','=',$id)->first();
         $visits = Visits::where('event_id','=',$firstEvent->event_id)->get();
-        $lastVaccinations = DB::table('last_vaccinations')->where('event_id','=',$firstEvent->event_id)->get();
+        /* get pet plan on the basis of pet id */
+        $petPlan = DB::table('pet_plan')->select('plan_id')->where('pet_id','=',$id)->first();
+        /* get vaccination ids on the basis of plan id */
+        $vaccineIds = DB::table('vaccinations')->select('vaccine_id')->where('plan_id','=',$petPlan->plan_id)->get();
+        $vaccineIdsArr = array();
+        foreach($vaccineIds as $vaccineId){
+            $vaccineIdsArr[] = $vaccineId->vaccine_id;
+        }
+        $lastVaccinations = DB::table('last_vaccinations')->whereIn('vaccine_id',$vaccineIdsArr)->get();
         $examinations = Examinations::all();
         $treatments = Treatments::all();
         return view('veterinary.treatment.show',compact('records','events','lastVaccinations','visits','token','examinations','treatments'));

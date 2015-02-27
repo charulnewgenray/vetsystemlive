@@ -16,3 +16,7 @@ For Submit Forms:-
 
 For Treatment:-
  I have used hard code id 1 because plan table not build for the treatments
+
+For 2 nd screen:-
+ Vaccination history according to pet id
+ Make a tab for approval requests
