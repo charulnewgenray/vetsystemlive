@@ -110,6 +110,5 @@ class Treatments extends Model {
                 );
             }
         }
-
     }
 }
