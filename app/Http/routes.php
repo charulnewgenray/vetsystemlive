@@ -113,7 +113,6 @@ Route::group([
 			Route::get('/pet/{id}',['as' => 'veterinary.pet.show', 'uses' => 'Veterinary\Treatment\PetController@show']);
 			Route::post('/pet/{id}/event/',['as' => 'veterinary.event.show', 'uses' => 'Veterinary\Treatment\EventController@getEvent']);
 		});
-
 	});
 });
 
