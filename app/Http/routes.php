@@ -104,12 +104,14 @@ Route::group([
 		Route::get('/pet/',['as' => 'veterinary.pet.index', 'uses' => 'Veterinary\Treatment\PetController@index']);
 		Route::post('/pet/',['as' => 'veterinary.pet.petlogin', 'uses' => 'Veterinary\Treatment\PetController@petlogin']);
 		Route::get('/petlogout',['as' => 'veterinary.pet.petlogout', 'uses' => 'Veterinary\Treatment\PetController@petlogout']);
+		Route::post('/settreatment/',['as' => 'veterinary.treatment.post', 'uses' => 'Veterinary\Treatment\TreatmentController@setTreatment']);
 
 		Route::group([
 			'middleware' => 'pets.auth',
 			'redirect' => 'veterinary/petlogout'
 		],function(){
 			Route::get('/pet/{id}',['as' => 'veterinary.pet.show', 'uses' => 'Veterinary\Treatment\PetController@show']);
+			Route::post('/pet/{id}/event/',['as' => 'veterinary.event.show', 'uses' => 'Veterinary\Treatment\EventController@getEvent']);
 		});
 
 	});

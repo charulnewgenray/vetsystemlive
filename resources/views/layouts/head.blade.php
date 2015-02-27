@@ -9,6 +9,7 @@
 <link href="/css/plugins/morris.css" rel="stylesheet">
 <link href="/css/app-rtl.css" rel="stylesheet">
 <link href="/css/app-custom.css" rel="stylesheet">
+<link href="/css/combobox/jquery.searchableSelect.css" rel="stylesheet">
 <!-- Fonts -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
@@ -20,3 +21,6 @@
 <![endif]-->
 
 <script src="/js/jquery/jquery-1.11.0.js"></script>
+<script src="/js/jquery/bootstrap-filestyle.min.js"></script>
+<script src="/js/combobox/jquery.searchableSelect.js"></script>
+<script src="/js/metronic/metronic.js"></script>

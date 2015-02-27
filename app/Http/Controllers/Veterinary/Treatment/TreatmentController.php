@@ -108,7 +108,10 @@ class TreatmentController extends Controller {
 		}else{
 			$file = Input::file('attached-treatment');
 			$destinationPath = 'attachments/';
-			$file->move($destinationPath,$file->getClientOriginalName());
+			if($file){
+				$file->move($destinationPath,$file->getClientOriginalName());
+			}
+
 
 			if($post['new-event-hidden']){
 				$treatmentPost = Treatments::NewEventTreatment($post);

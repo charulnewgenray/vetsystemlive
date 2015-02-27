@@ -21,16 +21,17 @@ class Treatments extends Model {
         $lastVisitId = DB::getPdo()->lastInsertId();
         if($data['exam_id']){
             foreach($data['exam_id'] as $key => $exam_id){
-                if($data['examination-label'][$key]  && $data['examination-value'][$key]){
+                if($data['examination-value'][$key]){
+                    $examinationInfo = DB::table('examinations')->select('exam_name')->where('exam_id','=',$exam_id)->first();
                     $visitExaminations = DB::table('visit_examinations')->insert(
-                        array('visit_id' => $lastVisitId , 'exam_id' => $exam_id ,'label' => $data['examination-label'][$key], 'value' => $data['examination-value'][$key],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
+                        array('visit_id' => $lastVisitId , 'exam_id' => $exam_id ,'label' => $examinationInfo->exam_name, 'value' => $data['examination-value'][$key],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
                     );
                 }
 
             }
         }
 
-        if($data['attached-treatment']->getClientOriginalName()){
+        if(isset($data['attached-treatment'])){
             if(!$data['file-label']){
                 $data['file-label'] = "";
             }
@@ -74,15 +75,16 @@ class Treatments extends Model {
         $lastVisitId = DB::getPdo()->lastInsertId();
         if($data['exam_id']){
             foreach($data['exam_id'] as $key => $exam_id){
-                if($data['examination-label'][$key]  && $data['examination-value'][$key]){
+                if($data['examination-value'][$key]){
+                    $examinationInfo = DB::table('examinations')->select('exam_name')->where('exam_id','=',$exam_id)->first();
                     $visitExaminations = DB::table('visit_examinations')->insert(
-                        array('visit_id' => $lastVisitId , 'exam_id' => $exam_id ,'label' => $data['examination-label'][$key], 'value' => $data['examination-value'][$key],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
+                        array('visit_id' => $lastVisitId , 'exam_id' => $exam_id ,'label' => $examinationInfo->exam_name, 'value' => $data['examination-value'][$key],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
                     );
                 }
 
             }
         }
-        if($data['attached-treatment']->getClientOriginalName()){
+        if(isset($data['attached-treatment'])){
             if(!$data['file-label']){
                 $data['file-label'] = "";
             }
