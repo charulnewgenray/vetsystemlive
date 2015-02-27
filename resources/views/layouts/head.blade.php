@@ -21,4 +21,5 @@
 <![endif]-->
 
 <script src="/js/jquery/jquery-1.11.0.js"></script>
+<script src="/js/jquery/bootstrap-filestyle.min.js"></script>
 <script src="/js/combobox/jquery.searchableSelect.js"></script>

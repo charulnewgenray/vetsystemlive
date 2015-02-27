@@ -9,3 +9,10 @@ For this now:-
 	we create a table that will map the pet_plan
 		fields:-
 		id,plan_id,pet_id,customer_id
+
+
+For Submit Forms:-
+ we will use a token that if a form is submitting once with a token cannot be resubmit.
+
+For Treatment:-
+ I have used hard code id 1 because plan table not build for the treatments

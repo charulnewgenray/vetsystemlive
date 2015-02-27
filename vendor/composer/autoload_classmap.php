@@ -17,7 +17,7 @@ return array(
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateVaccinationsTable' => $baseDir . '/database/migrations/2015_02_20_011854_create_vaccinations_table.php',
     'CreateVeterinariansTable' => $baseDir . '/database/migrations/2015_02_19_170216_create_veterinarians_table.php',
-    'CreateVisitExaminationsTable' => $baseDir . '/database/migrations/2015_02_23_074702_create_visit_examinations_table.php',
+    'CreateVisitExaminationsTable' => $baseDir . '/database/migrations/2015_02_25_114435_create_visit_examinations_table.php',
     'CreateVisitTreatmentsTable' => $baseDir . '/database/migrations/2015_02_20_080439_create_visit_treatments_table.php',
     'CreateVisitsTable' => $baseDir . '/database/migrations/2015_02_20_070936_create_visits_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

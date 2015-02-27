@@ -14,7 +14,7 @@ class TreatmentAttachmentsTableSeeder extends Seeder {
         $treatment_attachments = array(
             'visit_id' => '1',
             'label' => 'X ray attachment',
-            'file_path' => 'http://localhost/laravel/vetsystemlive/test.txt',
+                'file_path' => 'vetsystemlive.com/attachments/test.txt',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
         );

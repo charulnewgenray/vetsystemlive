@@ -14,6 +14,7 @@ class VisitExaminationsTableSeeder extends Seeder {
         $visit_examinations = array(
             'visit_id' => '1',
             'exam_id' => '1',
+            'label' => 'Exam Label',
             'value' => 'Exam Value',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
