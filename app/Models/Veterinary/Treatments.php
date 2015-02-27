@@ -19,9 +19,26 @@ class Treatments extends Model {
             array('event_id' => $data['event'] , 'visit_description' => $data['visit_description'] , 'is_emergency' => $data['emergency'],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
         );
         $lastVisitId = DB::getPdo()->lastInsertId();
-        $visitExaminations = DB::table('visit_examinations')->insert(
-            array('visit_id' => $lastVisitId , 'exam_id' => $data['examination-id'] , 'value' => $data['examination-value'],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
-        );
+        if($data['exam_id']){
+            foreach($data['exam_id'] as $key => $exam_id){
+                if($data['examination-label'][$key]  && $data['examination-value'][$key]){
+                    $visitExaminations = DB::table('visit_examinations')->insert(
+                        array('visit_id' => $lastVisitId , 'exam_id' => $exam_id ,'label' => $data['examination-label'][$key], 'value' => $data['examination-value'][$key],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
+                    );
+                }
+
+            }
+        }
+
+        if($data['attached-treatment']->getClientOriginalName()){
+            if(!$data['file-label']){
+                $data['file-label'] = "";
+            }
+            $treatmentAttachments = DB::table('treatment_attachments')->insert(
+                array('visit_id' => $lastVisitId , 'label' => $data['file-label'] , 'file_path' => $data['attached-treatment']->getClientOriginalName(),'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
+            );
+        }
+
         if(isset($data['covered-treatment'])){
             foreach($data['covered-treatment'] as $data1){
                 $getTreatmentInfo = DB::table('treatments')->where('treatment_id','=',$data1)->first();
@@ -55,13 +72,25 @@ class Treatments extends Model {
             array('event_id' => $lastEventId , 'visit_description' => $data['visit_description'] , 'is_emergency' => $data['emergency'],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
         );
         $lastVisitId = DB::getPdo()->lastInsertId();
-        $visitExaminations = DB::table('visit_examinations')->insert(
-            array('visit_id' => $lastVisitId , 'exam_id' => $data['examination-id'] , 'value' => $data['examination-value'],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
-        );
+        if($data['exam_id']){
+            foreach($data['exam_id'] as $key => $exam_id){
+                if($data['examination-label'][$key]  && $data['examination-value'][$key]){
+                    $visitExaminations = DB::table('visit_examinations')->insert(
+                        array('visit_id' => $lastVisitId , 'exam_id' => $exam_id ,'label' => $data['examination-label'][$key], 'value' => $data['examination-value'][$key],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
+                    );
+                }
 
-        $treatmentAttachments = DB::table('treatment_attachments')->insert(
-            array('visit_id' => $lastVisitId , 'label' => $data['file-label'] , 'file_path' => $data['attached-treatment']->getClientOriginalName(),'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
-        );
+            }
+        }
+        if($data['attached-treatment']->getClientOriginalName()){
+            if(!$data['file-label']){
+                $data['file-label'] = "";
+            }
+            $treatmentAttachments = DB::table('treatment_attachments')->insert(
+                array('visit_id' => $lastVisitId , 'label' => $data['file-label'] , 'file_path' => $data['attached-treatment']->getClientOriginalName(),'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
+            );
+        }
+
 
 
         if(isset($data['covered-treatment'])){

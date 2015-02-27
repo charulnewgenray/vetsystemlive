@@ -102,13 +102,7 @@ class EventController extends Controller {
 			$visitsHtml .= '<label class="col-xs-4 control-label">'."Visit $createdDate".'</label>';
 			$visitsHtml .= '<div class="col-xs-8"><p class="form-control-static">'."$visit->visit_description".'</p></div>';
 		}
-		$lastVaccinations = DB::table('last_vaccinations')->where('event_id','=',Input::get('event_id'))->get();
-		foreach($lastVaccinations as $lastVaccination){
-			$lastVaccinationsHtml .= '<label class="col-xs-3 control-label">'."$lastVaccination->vaccine_name".'</label>';
-			$createdDate = date('Y-m-d',strtotime($lastVaccination->created_at));
-			$lastVaccinationsHtml .= '<div class="col-xs-9"><p class="form-control-static">'."$createdDate".'</p></div>';
-		}
-		$html = array('visits'=>$visitsHtml,'last_vaccinations'=>$lastVaccinationsHtml);
+		$html = array('visits'=>$visitsHtml);
 		echo json_encode($html);
 	}
 
