@@ -19,7 +19,7 @@ class Treatments extends Model {
             array('event_id' => $data['event'] , 'visit_description' => $data['visit_description'] , 'is_emergency' => $data['emergency'],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
         );
         $lastVisitId = DB::getPdo()->lastInsertId();
-        if($data['exam_id']){
+        if(isset($data['exam_id'])){
             foreach($data['exam_id'] as $key => $exam_id){
                 if($data['examination-value'][$key]){
                     $examinationInfo = DB::table('examinations')->select('exam_name')->where('exam_id','=',$exam_id)->first();
@@ -72,7 +72,7 @@ class Treatments extends Model {
             array('event_id' => $lastEventId , 'visit_description' => $data['visit_description'] , 'is_emergency' => $data['emergency'],'created_at'=>date('Y-m-d H:i:s'),'updated_at'=>date('Y-m-d H:i:s'))
         );
         $lastVisitId = DB::getPdo()->lastInsertId();
-        if($data['exam_id']){
+        if(isset($data['exam_id'])){
             foreach($data['exam_id'] as $key => $exam_id){
                 if($data['examination-value'][$key]){
                     $examinationInfo = DB::table('examinations')->select('exam_name')->where('exam_id','=',$exam_id)->first();
