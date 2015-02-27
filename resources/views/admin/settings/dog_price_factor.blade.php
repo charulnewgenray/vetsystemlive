@@ -9,7 +9,7 @@
     </div>
     <!-- /.row -->
     <div class="page-content">
-        @include('admin.layouts.messages')
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive borderless">
@@ -18,6 +18,7 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
+                            <th>{{ trans('general.Code') }}</th>
                             <th>{{ trans('general.Label') }}</th>
                             <th>{{ trans('general.Price') }}</th>
                         </tr>
@@ -25,7 +26,8 @@
                         <tbody>
                         @foreach($dogpricefactor as $index => $dogprice)
                             <tr class="odd gradeX">
-                                <td>{!! FORM::hidden("data[$index][id]",$dogprice->id) !!}{{$dogprice->label}}</td>
+                                <td>{{$dogprice->code}}</td>
+                                <td>{!! FORM::hidden("data[$index][id]",$dogprice->id) !!}{!! FORM::text("data[$index][label]",$dogprice->label) !!}</td>
                                 <td>{!! FORM::text("data[$index][price]",$dogprice->price) !!}</td>
                             </tr>
                         @endforeach

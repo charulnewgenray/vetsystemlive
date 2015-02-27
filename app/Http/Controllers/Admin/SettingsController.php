@@ -40,7 +40,7 @@ class SettingsController extends Controller {
 					return redirect()->back()->withErrors("Price can not be null");
 				elseif(!is_numeric($data['price']))
 					return redirect()->back()->withErrors("Please enter numeric values");
-				$results = DB::update("update $id set price = ? where id = ?", [(float)$data['price'],$data['id']]);
+				$results = DB::update("update $id set price = ? , label = ? where id = ?", [(float)$data['price'],$data['label'],$data['id']]);
 			}
 		} catch(EntityNotValidException $e) {
 			return Redirect::back()->withInput()->withFlashDanger($e->validationErrors());
@@ -65,7 +65,7 @@ class SettingsController extends Controller {
 					return redirect()->back()->withErrors("Price can not be null");
 				elseif(!is_numeric($data['price']))
 					return redirect()->back()->withErrors("Please enter numeric values");
-				$results = DB::update("update $id set price = ? where id = ?", [(float)$data['price'],$data['id']]);
+				$results = DB::update("update $id set price = ?, label = ? where id = ?", [(float)$data['price'], $data['label'],$data['id']]);
 			}
 		} catch(EntityNotValidException $e) {
 			return Redirect::back()->withInput()->withFlashDanger($e->validationErrors());

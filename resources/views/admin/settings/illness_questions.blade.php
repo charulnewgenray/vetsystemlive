@@ -8,7 +8,7 @@
         </button>
     </div>
 
-    @include('admin.layouts.messages')
+
     <table class="table table-striped table-bordered table-hover" id="illnessquestions-table">
         <thead>
         <tr>

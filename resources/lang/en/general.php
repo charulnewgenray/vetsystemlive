@@ -32,6 +32,7 @@ return [
 	"Add-New-Breed" => "Add New Breed",
 	"Update-Dog-Breed" => "Update Dog Breed",
 	"Label" => "Label",
+	"Code" => "Code",
 	"Price" => "Price",
 	"Value" => "Value",
 	"Size" => "Size",
@@ -45,5 +46,17 @@ return [
 	"Add-New-Message" => "Add New Message",
 	"Update-General-Message" => "Update General Message",
 	"Add-New-Question" => "Add New Question",
-	"Add-New-Price" => "Add New Price"	
+	"Add-New-Price" => "Add New Price",
+	"Manage-Veterinary" => "Manage Veterinary",
+	"veterinary" => "veterinary",
+	"vet_id" => "vet id",
+	"vet_name" => "vet name",
+	"vet_city" => "vet city",
+	"vet_clinic" => "vet clinic",
+	"vet_phone" => "vet phone",
+	"Physicians" => "Physicians",
+	"View-Physicians" => "View Physicians",
+	"Add-Physicians" => "Add Physicians",
+	"package" => "package"
+
 ];

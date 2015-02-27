@@ -16,6 +16,9 @@ $(function() {
     $('#catquestions-table').DataTable({
         ordering:  false
     });
+    $('#physician-table').DataTable({
+        ordering:  false
+    });
 });
 
 //Loads the correct sidebar on window load,

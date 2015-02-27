@@ -10,8 +10,33 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/login', 'welcomeController@index');
+Route::get('/', 'website\HomeController@index');
+Route::get('about-us', 'website\HomeController@aboutUs');
+Route::get('what-we-cover', 'website\HomeController@whatWeCover');
+Route::get('what-not-covered', 'website\HomeController@whatNotCovered');
+Route::get('faq', 'website\HomeController@faq');
+Route::get('plans', 'website\HomeController@plans');
+Route::get('Service-for-the-dog', 'website\HomeController@serviceForTheDog');
+Route::get('Service-for-the-cat', 'website\HomeController@serviceForTheCat');
+Route::get('for-Veterinarians', 'website\HomeController@forVeterinarians');
+Route::get('contact-us', 'website\HomeController@contactUs');
+Route::get('request-quote', 'website\JoinController@index');
+Route::get('terms-and-conditions', 'website\HomeController@termsAndConditions');
+Route::get('join', 'website\JoinController@index');
 
-Route::get('/', 'WelcomeController@index');
+Route::get('join/1','website\JoinController@showStep1');
+Route::get('join/2','website\JoinController@showStep2');
+Route::get('join/3','website\JoinController@showStep3');
+Route::get('join/4','website\JoinController@showStep4');
+Route::get('join/5','website\JoinController@showStep5');
+
+Route::post('join/2',['as' => 'join.step2', 'uses' => 'website\JoinController@step1']);
+Route::post('join/3',['as' => 'join.step3', 'uses' => 'website\JoinController@step2']);
+Route::post('join/4',['as' => 'join.step4', 'uses' => 'website\JoinController@step3']);
+Route::post('join/5',['as' => 'join.step5', 'uses' => 'website\JoinController@step4']);
+
+Route::get('api/city',['as' => 'city','uses' => 'Api\VeterinaryController@store']);
 
 Route::get('/home', function(){
 
@@ -56,6 +81,12 @@ Route::group([
 		Route::post('/settings/{id}',['as' => 'admin.settings.create','uses' => 'Admin\SettingsController@create']);
 		Route::delete('/settings/{id}',['as' => 'admin.settings.delete','uses' => 'Admin\SettingsController@delete']);
 
+		/*Veterinary Management*/
+		Route::get('/veterinary',['as' => 'admin.veterinary.index','uses' => 'Admin\VeterinaryController@index']);
+		Route::get('/physician',['as' => 'admin.veterinary.create','uses' => 'Admin\VeterinaryController@create']);
+		Route::get('/physician/{id}',['as' => 'admin.veterinary.show','uses' => 'Admin\VeterinaryController@show']);
+		Route::put('/veterinary',['as' => 'admin.veterinary.store','uses' => 'Admin\VeterinaryController@store']);
+
 	});
 });
 
@@ -73,16 +104,12 @@ Route::group([
 		Route::get('/pet/',['as' => 'veterinary.pet.index', 'uses' => 'Veterinary\Treatment\PetController@index']);
 		Route::post('/pet/',['as' => 'veterinary.pet.petlogin', 'uses' => 'Veterinary\Treatment\PetController@petlogin']);
 		Route::get('/petlogout',['as' => 'veterinary.pet.petlogout', 'uses' => 'Veterinary\Treatment\PetController@petlogout']);
-		Route::post('/settreatment/',['as' => 'veterinary.treatment.post', 'uses' => 'Veterinary\Treatment\TreatmentController@setTreatment']);
-
 
 		Route::group([
 			'middleware' => 'pets.auth',
 			'redirect' => 'veterinary/petlogout'
 		],function(){
 			Route::get('/pet/{id}',['as' => 'veterinary.pet.show', 'uses' => 'Veterinary\Treatment\PetController@show']);
-			Route::post('/pet/{id}/event/',['as' => 'veterinary.event.show', 'uses' => 'Veterinary\Treatment\EventController@getEvent']);
-
 		});
 
 	});

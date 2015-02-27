@@ -12,10 +12,7 @@ class VeterinariansTableSeeder extends Seeder {
         DB::table('veterinarians')->truncate();
 
         $veterinarian = array(
-            'vet_first_name' => 'Veterinary Doctor',
-            'vet_last_name' => 'Veterinary Last Name',
-            'vet_gender' => 'male',
-            'vet_dob' => '2015-02-19',
+            'vet_name' => 'Veterinary Doctor',
             'vet_address_1' => '16, Yafo Street',
             'vet_address_2' => 'JERUSALEM',
             'vet_city' => '11',

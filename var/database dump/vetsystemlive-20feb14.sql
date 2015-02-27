@@ -3,6 +3,7 @@
 -- Host: localhost    Database: vetsystemlive
 -- ------------------------------------------------------
 -- Server version	5.1.50-community
+SET FOREIGN_KEY_CHECKS = 0;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -694,3 +695,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-02-20  9:19:49
+SET FOREIGN_KEY_CHECKS = 1;

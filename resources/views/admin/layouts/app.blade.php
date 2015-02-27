@@ -9,6 +9,7 @@
 			<div id="wrapper">
 				@include('admin.layouts.header')
 				<div id="page-wrapper">
+					@include('admin.layouts.messages')
 					@yield('content')
 				</div>
 			</div>

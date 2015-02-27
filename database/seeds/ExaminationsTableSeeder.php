@@ -12,7 +12,9 @@ class ExaminationsTableSeeder extends Seeder {
         DB::table('examinations')->truncate();
 
         $examinations = array(
-            'exam_name' => 'Test Exam Name',
+            'visit_id' => '1',
+            'label' => 'Examination First',
+            'value' => 'Examinations First Value',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
         );
