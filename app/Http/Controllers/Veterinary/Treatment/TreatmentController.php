@@ -1,17 +1,20 @@
 <?php namespace App\Http\Controllers\Veterinary\Treatment;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Request;
+use App\Models\Veterinary\Events;
+use App\Models\Veterinary\Examinations;
+use App\Models\Veterinary\TreatmentAttachments;
+use App\Models\Veterinary\Veterinarians;
+use App\Models\Veterinary\VisitExamination;
+use App\Models\Veterinary\Visits;
+use App\Models\Veterinary\VisitTreatments;
+use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use App\Models\Veterinary\Treatments;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Support\Facades\Session;
+
 
 class TreatmentController extends Controller {
 
@@ -92,37 +95,44 @@ class TreatmentController extends Controller {
 	/**
 	 * set the data for a particular event into the required tables
 	 */
-	public function setTreatment(){
+	public function submitClaim(){
 		$post = Input::all();
-		/* if the form use the new event field */
-		if($post['new-event-hidden']){
-			$rules = array('new-event' => 'required');
-		}else{
-			$rules = array();
-		}
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->fails())
-		{
-			return redirect()->back()->withErrors($validator);
-		}else{
-			$file = Input::file('attached-treatment');
-			$destinationPath = 'attachments/';
-			if($file){
-				$file->move($destinationPath,$file->getClientOriginalName());
-			}
-
-
-			if($post['new-event-hidden']){
-				$treatmentPost = Treatments::NewEventTreatment($post);
-				return redirect()->back()->with('message',"Request Pet not found please recheck your credentials");
+		$treatments = Input::get('treatment');
+		try{
+			$vetid = Veterinarians::where('vet_email','=',Auth::user()->email)->pluck('vet_id');
+			if($post['is-new-event']){
+				$event = Events::create(array('pet_id' => Input::get('pet_id') , 'vet_id' => $vetid, 'name' => Input::get('new-event')));
+				$event_id = $event->id;
 			}else{
-				$treatmentPost = Treatments::ExistEventTreatment($post);
-                return redirect()->back()->with('message',"Request Pet not found please recheck your credentials");
+				$event_id = Input::get('event');
 			}
+			$visit = Visits::create(array('event_id'=> $event_id, 'visit_description' => Input::get('visit_description'),'is_emergency' => Input::get('is_emergency') ));
+			$visit_id = $visit->id;
+			foreach($treatments as $key => $value){
+				$treatment = Treatments::where('treatment_id','=',$key)->first();
+				VisitTreatments::create(['visit_id' => $visit_id , 'treatment_id' => $key ,'label' => $treatment->treatment_name , 'price' => $treatment->treatment_price ,'covered' =>  $value == 'covered'? 1 : 0]);
+			}
+			if(Input::get('examination')){
+				$examinations = Input::get('examination');
+				foreach($examinations  as $key => $value){
+					$examination = Examinations::where('exam_id','=',$key)->first();
+					VisitExamination::create(['visit_id' => $visit_id,'exam_id' => $examination->exam_id ,'label' => $examination->exam_name ,'value' => $value ]);
+				}
+			}
+
+			if(Input::get('file')){
+				$files = Input::get('files');
+				foreach($files as $key => $value){
+					TreatmentAttachments::create(['visit_id' => $visit_id,'label' => $value['title'], 'file_path' => $value['name']]);
+				}
+			}
+
+			Session::put('claim_id',rand(1000,100000));
+			return redirect()->back()->with('message' ,'101912212');
 		}
+		catch(EntityNotFoundException $e){
 
-
+		}
 	}
 
 }
