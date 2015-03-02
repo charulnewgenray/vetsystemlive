@@ -128,7 +128,7 @@ class TreatmentController extends Controller {
 			}
 
 			Session::put('claim_id',rand(1000,100000));
-			return redirect()->back()->with('message' ,'101912212');
+			return redirect()->back()->with('message' ,'Claim request as been accepted');
 		}
 		catch(EntityNotFoundException $e){
 
