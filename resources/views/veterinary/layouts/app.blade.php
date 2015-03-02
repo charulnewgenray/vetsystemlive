@@ -19,6 +19,7 @@
 
 	<!-- Scripts -->
 	@include('layouts.differedscripts')
+	@yield('page-scripts')
 
 </body>
 </html>

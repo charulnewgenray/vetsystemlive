@@ -6,4 +6,5 @@ use Illuminate\Support\Facades\DB;
 class Events extends Model {
 
     protected $table = 'events';
+    protected $fillable = array('pet_id', 'vet_id', 'name');
 }

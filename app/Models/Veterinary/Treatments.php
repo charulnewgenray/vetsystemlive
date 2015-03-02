@@ -56,7 +56,6 @@ class Treatments extends Model {
                 );
             }
         }
-
     }
 
     public function scopeNewEventTreatment($query,$data){
@@ -111,6 +110,5 @@ class Treatments extends Model {
                 );
             }
         }
-
     }
 }

@@ -52,6 +52,7 @@ class PetController extends Controller {
 
     public function petlogout(){
         Session::forget('treatment');
+        Session::forget('claim_id');
         return redirect()->route('veterinary.pet.index');
     }
 

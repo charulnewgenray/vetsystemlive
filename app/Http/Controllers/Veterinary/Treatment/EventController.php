@@ -98,10 +98,13 @@ class EventController extends Controller {
 		$lastVaccinationsHtml = "";
 		$visits = Visits::where('event_id','=',Input::get('event_id'))->get();
 		foreach($visits as $visit){
-			$createdDate = date('Y-m-d',strtotime($visit->created_at));
-			$visitsHtml .= '<label class="col-xs-4 control-label">'."Visit $createdDate".'</label>';
+			$createdDate = date('d F Y',strtotime($visit->created_at));
+			$visitsHtml .= "<div class='row'>";
+			$visitsHtml .= '<label class="col-xs-4 control-label" dir="ltr">'."$createdDate".'</label>';
 			$visitsHtml .= '<div class="col-xs-8"><p class="form-control-static">'."$visit->visit_description".'</p></div>';
+			$visitsHtml .= "</div>";
 		}
+
 		$html = array('visits'=>$visitsHtml);
 		echo json_encode($html);
 	}

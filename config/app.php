@@ -146,8 +146,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
-		'Rappasoft\Vault\VaultServiceProvider',
-
+		'Rappasoft\Vault\VaultServiceProvider'
 	],
 
 	/*

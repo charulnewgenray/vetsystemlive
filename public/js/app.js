@@ -19,6 +19,13 @@ $(function() {
     $('#physician-table').DataTable({
         ordering:  false
     });
+    $('#treatment_list').DataTable({
+        "dom": 'ftp',
+        ordering:  false,
+        pageLength: 5,
+        paging: true,
+        info: false
+    });
 });
 
 //Loads the correct sidebar on window load,
@@ -42,4 +49,10 @@ $(function() {
             $("#page-wrapper").css("min-height", (height) + "px");
         }
     })
+
 })
+
+$(document).ready(function() {
+    // initiate layout and plugins
+    Metronic.init(); // init metronic core components
+});
