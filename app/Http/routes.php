@@ -44,6 +44,8 @@ Route::get('/home', function(){
 		return Redirect::to('/admin');
 	elseif(Auth::user()->hasRole('Veterinarian'))
 		return Redirect::to('/veterinary');
+	elseif(Auth::user()->hasRole('Customer'))
+		return Redirect::to('/customer');
 	elseif(Auth::user()->hasRole('Administrator'))
 		return Redirect::to('/access/users');
 	else return Redirect::to('/');
@@ -113,6 +115,23 @@ Route::group([
 			Route::post('/pet/{id}/event/',['as' => 'veterinary.event.show', 'uses' => 'Veterinary\Treatment\EventController@getEvent']);
 			Route::post('/pet/{id}/submitClaim/',['as' => 'veterinary.pet.submitClaim', 'uses' => 'Veterinary\Treatment\TreatmentController@submitClaim']);
 		});
+	});
+});
+
+Route::group([
+	'middleware' => 'vault.routeNeedsRole',
+	'role' => ['Customer'],
+	'redirect' => 'auth/login',
+	'with' => ['error', 'You do not have access to do that.']
+], function()
+{
+	Route::group(['prefix' => 'customer'], function ()
+	{
+		/*customer Management*/
+		Route::get('/',['as' => 'customer.dashboard', 'uses' => 'Customer\DashboardController@index']);
+		Route::get('/info/',['as' => 'customer.customer.index', 'uses' => 'Customer\CustomerController@index']);
+		Route::get('/policy/',['as' => 'customer.customer.policy', 'uses' => 'Customer\CustomerController@policy']);
+		Route::get('/account/',['as' => 'customer.customer.account', 'uses' => 'Customer\CustomerController@account']);
 	});
 });
 
