@@ -8,6 +8,7 @@
 <link href="/css/plugins/timeline.css" rel="stylesheet">
 <link href="/css/plugins/morris.css" rel="stylesheet">
 <link href="/css/app-rtl.css" rel="stylesheet">
+<link href="/css/plugins/jquery-ui.min.css" rel="stylesheet">
 <link href="/css/app-custom.css" rel="stylesheet">
 <link href="/css/combobox/jquery.searchableSelect.css" rel="stylesheet">
 
@@ -24,6 +25,7 @@
 <![endif]-->
 
 <script src="/js/jquery/jquery-1.11.0.js"></script>
+<script src="/js/jquery/jquery-ui.min.js"></script>
 <script src="/js/combobox/jquery.searchableSelect.js"></script>
 <script src="/js/metronic/metronic.js"></script>
 

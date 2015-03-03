@@ -131,7 +131,8 @@ Route::group([
 		Route::get('/',['as' => 'customer.dashboard', 'uses' => 'Customer\DashboardController@index']);
 		Route::get('/info/',['as' => 'customer.customer.index', 'uses' => 'Customer\CustomerController@index']);
 		Route::get('/policy/',['as' => 'customer.customer.policy', 'uses' => 'Customer\CustomerController@policy']);
-		Route::get('/account/',['as' => 'customer.customer.account', 'uses' => 'Customer\CustomerController@account']);
+		Route::get('/account/',['as' => 'customer.customer.getAccount', 'uses' => 'Customer\CustomerController@getAccount']);
+		Route::post('/account/',['as' => 'customer.customer.postAccount', 'uses' => 'Customer\CustomerController@postAccount']);
 	});
 });
 

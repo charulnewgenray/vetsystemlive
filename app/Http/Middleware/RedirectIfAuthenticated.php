@@ -37,12 +37,14 @@ class RedirectIfAuthenticated {
 		{
 			//return new RedirectResponse(url('/home'));
 			if($this->auth->user()->hasRole('Admin'))
-				return new RedirectResponse(url('/admin'));
-			elseif($this->auth->user()->hasRole('Veterinarian'))
-				return new RedirectResponse(url('/veterinary'));
-			elseif($this->auth->user()->hasRole('Administrator'))
-				return new RedirectResponse(url('/access/users'));
-			else return new RedirectResponse(url('/'));
+			return new RedirectResponse(url('/admin'));
+		elseif($this->auth->user()->hasRole('Veterinarian'))
+			return new RedirectResponse(url('/veterinary'));
+		elseif($this->auth->user()->hasRole('Administrator'))
+			return new RedirectResponse(url('/access/users'));
+		elseif($this->auth->user()->hasRole('Customer'))
+			return new RedirectResponse(url('/customer'));
+		else return new RedirectResponse(url('/auth/logout'));
 		}
 
 		return $next($request);

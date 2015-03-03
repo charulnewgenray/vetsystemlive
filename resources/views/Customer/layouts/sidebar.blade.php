@@ -12,7 +12,7 @@
                 <a href="{{route('customer.customer.policy')}}" class="{{Request::path() == 'customer' ? 'active' : ''}}">Policies</a>
             </li>
             <li>
-                <a href="{{route('customer.customer.account')}}" class="{{Request::path() == 'customer' ? 'active' : ''}}">My Account</a>
+                <a href="{{route('customer.customer.getAccount')}}" class="{{Request::path() == 'customer' ? 'active' : ''}}">My Account</a>
             </li>
         </ul>
     </div>

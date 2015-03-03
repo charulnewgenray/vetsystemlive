@@ -3,14 +3,18 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Admin\Customer;
 use App\Models\Admin\Order;
 use App\Models\Veterinary\Pets;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Api\ApiController;
 
-class CustomerController extends Controller {
+class CustomerController extends Controller
+{
 
 	/**
 	 * Display a listing of the resource.
@@ -19,21 +23,23 @@ class CustomerController extends Controller {
 	 */
 	public function index()
 	{
-		$customer = Customer::where('user_id',Auth::id())->first();
+		$customer = Customer::where('user_id', Auth::id())->first();
 		$cityName = $this->getCityByCode($customer->city_code);
 		$countryName = $this->getCountryByCode($customer->country_code);
-		return view('customer.show',compact('customer','cityName','countryName'));
+		return view('customer.show', compact('customer', 'cityName', 'countryName'));
 
 	}
 
-	public function getCityByCode($code){
-		$cityName = DB::table('cities')->select('city')->where('id',$code)->first();
+	public function getCityByCode($code)
+	{
+		$cityName = DB::table('cities')->select('city')->where('id', $code)->first();
 		return $cityName;
 
 	}
 
-	public function getCountryByCode($code){
-		$countryName = DB::table('countries')->select('country_label')->where('country_code',$code)->first();
+	public function getCountryByCode($code)
+	{
+		$countryName = DB::table('countries')->select('country_label')->where('country_code', $code)->first();
 		return $countryName;
 
 	}
@@ -45,16 +51,16 @@ class CustomerController extends Controller {
 	 */
 	public function policy()
 	{
-		$customer = Customer::select('customer_id')->where('user_id',Auth::id())->first();
-		if($customer->customer_id){
-			$policies = Order::select('orders.package_name','orders.package_type','orders.card_number','orders.card_cvv',
-				'orders.card_exp','orders.order_total','orders.payment_status','orders.customer_id','orders.created_at','pets.pet_name',
+		$customer = Customer::select('customer_id')->where('user_id', Auth::id())->first();
+		if ($customer->customer_id) {
+			$policies = Order::select('orders.package_name', 'orders.package_type', 'orders.card_number', 'orders.card_cvv',
+				'orders.card_exp', 'orders.order_total', 'orders.payment_status', 'orders.customer_id', 'orders.created_at', 'pets.pet_name',
 				'policies.policy_number')
-				->join('pets','orders.pet_id','=','pets.pet_id')
-				->join('policies','orders.order_id','=','policies.order_id')
-				->where('orders.customer_id','=',$customer->customer_id)->get();
+				->join('pets', 'orders.pet_id', '=', 'pets.pet_id')
+				->join('policies', 'orders.order_id', '=', 'policies.order_id')
+				->where('orders.customer_id', '=', $customer->customer_id)->get();
 		}
-		return view('customer.policy',compact('policies'));
+		return view('customer.policy', compact('policies'));
 
 	}
 
@@ -63,10 +69,34 @@ class CustomerController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function account()
+	public function getAccount()
 	{
-		return view('customer.account');
+		$token = Session::get('_token');
+		$customer = Customer::where('user_id', Auth::id())->first();
+		$cityName = $this->getCityByCode($customer->city_code);
+		$cities = ApiController::getCities();
+		$countryName = $this->getCountryByCode($customer->country_code);
+		return view('customer.account', compact('customer', 'cityName', 'countryName','token','cities'));
 
+	}
+
+	public function postAccount(){
+		$post = Input::all();
+		if($post['password']){
+			$password = Hash::make($post['password']);
+			$update = Customer::where('customer_id','=',$post['customer_id'])
+				->update(array('first_name'=>$post['first_name'],'last_name'=>$post['last_name'],'email'=>$post['email'],
+					'primary_phone'=>$post['primary_phone'],'address'=>$post['address'],'post_code'=>$post['post_code'],
+					'secondary_phone'=>$post['secondary_phone'],'gender'=>$post['gender']));
+			$updateUser = DB::table('users')->where('id','=',$post['user_id'])
+						->update(array('password'=>$password));
+		}else{
+			$update = Customer::where('customer_id','=',$post['customer_id'])
+				->update(array('first_name'=>$post['first_name'],'last_name'=>$post['last_name'],'email'=>$post['email'],
+					'primary_phone'=>$post['primary_phone'],'address'=>$post['address'],'post_code'=>$post['post_code'],
+					'secondary_phone'=>$post['secondary_phone'],'gender'=>$post['gender']));
+		}
+		return redirect()->back()->with('flash_success', 'Information updated successfully.');
 	}
 
 	/**
