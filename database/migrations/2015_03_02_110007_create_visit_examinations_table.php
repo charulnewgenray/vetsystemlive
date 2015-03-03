@@ -23,6 +23,7 @@ class CreateVisitExaminationsTable extends Migration {
 		});
 	}
 
+
 	/**
 	 * Reverse the migrations.
 	 *
