@@ -69,14 +69,19 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">City</label>
                             <div class="col-md-6">
-                                <input id="search-cities" name="city" value="" type="text" placeholder="עיר"  class="form-control form-control-small ui-autocomplete-input">
-                                <!--<input type="text" class="form-control" name="city" value="{{$cityName->city}}" placeholder="City"/>-->
+                                <input id="search-cities" name="city" value="{{$customer->city_code}}" type="text" placeholder="עיר"  class="form-control form-control-small ui-autocomplete-input">
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Country</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="country" value="{{$countryName->country_label}}" placeholder="Country"/>
+                                <select class="form-control" id="select-country" name="country_code">
+                                    {{$customer->country_code}}
+                                    @foreach($countries as $country)
+                                        <option value="{{$country->country_code}}" @if($customer->country_code==$country->country_code) selected @endif >{{$country->country_label}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

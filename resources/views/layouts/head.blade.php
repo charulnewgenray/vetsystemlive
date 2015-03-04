@@ -9,6 +9,7 @@
 <link href="/css/plugins/morris.css" rel="stylesheet">
 <link href="/css/app-rtl.css" rel="stylesheet">
 <link href="/css/plugins/jquery-ui.min.css" rel="stylesheet">
+<link href="/website/css/main.css" rel="stylesheet">
 <link href="/css/app-custom.css" rel="stylesheet">
 <link href="/css/combobox/jquery.searchableSelect.css" rel="stylesheet">
 

@@ -14,6 +14,20 @@ class ApiController extends Controller {
 	}
 
 	public static function getCountries(){
-		return $user = DB::table('countries')->lists('country_label','country_code');
+		return $user = DB::table('countries')->select('country_label','country_code')->get();
+	}
+
+	public static function getCityByCode($code)
+	{
+		$cityName = DB::table('cities')->select('city')->where('id', $code)->first();
+		return $cityName;
+
+	}
+
+	public static function getCountryByCode($code)
+	{
+		$countryName = DB::table('countries')->select('country_label')->where('country_code', $code)->first();
+		return $countryName;
+
 	}
 }

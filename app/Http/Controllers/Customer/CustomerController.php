@@ -24,23 +24,9 @@ class CustomerController extends Controller
 	public function index()
 	{
 		$customer = Customer::where('user_id', Auth::id())->first();
-		$cityName = $this->getCityByCode($customer->city_code);
-		$countryName = $this->getCountryByCode($customer->country_code);
+		$cityName = ApiController::getCityByCode($customer->city_code);
+		$countryName = ApiController::getCountryByCode($customer->country_code);
 		return view('customer.show', compact('customer', 'cityName', 'countryName'));
-
-	}
-
-	public function getCityByCode($code)
-	{
-		$cityName = DB::table('cities')->select('city')->where('id', $code)->first();
-		return $cityName;
-
-	}
-
-	public function getCountryByCode($code)
-	{
-		$countryName = DB::table('countries')->select('country_label')->where('country_code', $code)->first();
-		return $countryName;
 
 	}
 
@@ -73,10 +59,9 @@ class CustomerController extends Controller
 	{
 		$token = Session::get('_token');
 		$customer = Customer::where('user_id', Auth::id())->first();
-		$cityName = $this->getCityByCode($customer->city_code);
 		$cities = ApiController::getCities();
-		$countryName = $this->getCountryByCode($customer->country_code);
-		return view('customer.account', compact('customer', 'cityName', 'countryName','token','cities'));
+		$countries = ApiController::getCountries();
+		return view('customer.account', compact('customer','token','cities','countries'));
 
 	}
 
@@ -87,14 +72,16 @@ class CustomerController extends Controller
 			$update = Customer::where('customer_id','=',$post['customer_id'])
 				->update(array('first_name'=>$post['first_name'],'last_name'=>$post['last_name'],'email'=>$post['email'],
 					'primary_phone'=>$post['primary_phone'],'address'=>$post['address'],'post_code'=>$post['post_code'],
-					'secondary_phone'=>$post['secondary_phone'],'gender'=>$post['gender']));
+					'secondary_phone'=>$post['secondary_phone'],'gender'=>$post['gender'],'city_code'=>$post['city'],
+					'country_code'=>$post['country_code']));
 			$updateUser = DB::table('users')->where('id','=',$post['user_id'])
 						->update(array('password'=>$password));
 		}else{
 			$update = Customer::where('customer_id','=',$post['customer_id'])
 				->update(array('first_name'=>$post['first_name'],'last_name'=>$post['last_name'],'email'=>$post['email'],
 					'primary_phone'=>$post['primary_phone'],'address'=>$post['address'],'post_code'=>$post['post_code'],
-					'secondary_phone'=>$post['secondary_phone'],'gender'=>$post['gender']));
+					'secondary_phone'=>$post['secondary_phone'],'gender'=>$post['gender'],'city_code'=>$post['city'],
+					'country_code'=>$post['country_code']));
 		}
 		return redirect()->back()->with('flash_success', 'Information updated successfully.');
 	}
